@@ -1,0 +1,24 @@
+<%= simple_form_for(@comparison) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :company %>
+    
+    <%= f.label 'select the  txt control file to upload', {class: 'control-label'} %>
+
+    <%= f.file_field :attachment, class: 'form-control' %>
+    <br>
+    <%= f.label "select the CVS file to chose data from", {class: 'control-label'} %>
+    <%= f.file_field :attachment2, {class: 'form-control'} %>
+    <p> </p>
+
+
+
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-success btn-block' %>
+    
+  </div>
+<% end %>

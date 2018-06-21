@@ -1,0 +1,25 @@
+.well { 
+    width: 400px; 
+    padding-left: 10px ;
+    margin-left: 20px ;
+    margin-right: 90px ;
+}
+
+
+
+
+
+
+
+.well .form-control { 
+     
+    padding-bottom: 5px ;
+    
+}
+
+.control-label { 
+     
+    padding-bottom: 5px ;
+    
+}
+

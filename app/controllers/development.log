@@ -1,0 +1,36 @@
+Started POST "/comparisons" for 70.167.83.251 at 2018-02-28 19:24:43 +0000
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ComparisonsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6KiGbGX7sMwU9MLnbEI7Jvf6O33Erz2RkuSd98FA5y53ohjl2AVO5Sdh8wYYYAfmEDNqvT0xxgCRT6piH42p/w==", "comparison"=>{"company"=>"sendgr10", "attachment"=>#<ActionDispatch::Http::UploadedFile:0x0000000690c148 @tempfile=#<Tempfile:/tmp/RackMultipart20180228-3898-1m2cvcb.txt>, @original_filename="phone2.txt", @content_type="text/plain", @headers="Content-Disposition: form-data; name=\"comparison[attachment]\"; filename=\"phone2.txt\"\r\nContent-Type: text/plain\r\n">, "attachment2"=>#<ActionDispatch::Http::UploadedFile:0x0000000690c0d0 @tempfile=#<Tempfile:/tmp/RackMultipart20180228-3898-1i8ep2o.csv>, @original_filename="trial.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"comparison[attachment2]\"; filename=\"trial.csv\"\r\nContent-Type: text/csv\r\n">}, "commit"=>"Create Comparison"}
+STORE[cache] AttachmentUploader[:attachment] Comparison 1 file (0.0s)
+STORE[cache] AttachmentUploader[:attachment2] Comparison 1 file (0.0s)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "comparisons" ("company", "textFile", "csvFile", "downloadUrl", "created_at", "updated_at", "attachment_data", "attachment2_data") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["company", "sendgr10"], ["textFile", "/public/uploads/cache/410c5be37b519b6acac0500294f200bf.txt"], ["csvFile", "/public/uploads/cache/5f0740b30d41f968e233d9d70546a46b.csv"], ["downloadUrl", "/download/sendgr10.csv"], ["created_at", "2018-02-28 19:24:43.735597"], ["updated_at", "2018-02-28 19:24:43.735597"], ["attachment_data", "{\"id\":\"410c5be37b519b6acac0500294f200bf.txt\",\"storage\":\"cache\",\"metadata\":{\"filename\":\"phone2.txt\",\"size\":108,\"mime_type\":\"text/plain\"}}"], ["attachment2_data", "{\"id\":\"5f0740b30d41f968e233d9d70546a46b.csv\",\"storage\":\"cache\",\"metadata\":{\"filename\":\"trial.csv\",\"size\":60501,\"mime_type\":\"text/csv\"}}"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+STORE[store] AttachmentUploader[:attachment2] Comparison[49] 1 file (0.0s)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "comparisons" SET "updated_at" = $1, "attachment2_data" = $2 WHERE "comparisons"."id" = $3[0m  [["updated_at", "2018-02-28 19:24:43.740102"], ["attachment2_data", "{\"id\":\"4c196a18b56032f551b97ef948e93203.csv\",\"storage\":\"store\",\"metadata\":{\"filename\":\"trial.csv\",\"size\":60501,\"mime_type\":\"text/csv\"}}"], ["id", 49]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+STORE[store] AttachmentUploader[:attachment] Comparison[49] 1 file (0.0s)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "comparisons" SET "updated_at" = $1, "attachment_data" = $2 WHERE "comparisons"."id" = $3[0m  [["updated_at", "2018-02-28 19:24:43.744121"], ["attachment_data", "{\"id\":\"0f329d0584ab1bc2a6acf507669fce5a.txt\",\"storage\":\"store\",\"metadata\":{\"filename\":\"phone2.txt\",\"size\":108,\"mime_type\":\"text/plain\"}}"], ["id", 49]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://104.156.229.55/comparisons/49
+Completed 302 Found in 58ms (ActiveRecord: 11.8ms)
+
+
+Started GET "/comparisons/49" for 70.167.83.251 at 2018-02-28 19:24:43 +0000
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ComparisonsController#show as HTML
+  Parameters: {"id"=>"49"}
+CsvMailer#csv_email: processed outbound mail in 270.6ms
+  [1m[36mComparison Load (0.6ms)[0m  [1m[34mSELECT  "comparisons".* FROM "comparisons" WHERE "comparisons"."id" = $1 LIMIT $2[0m  [["id", 49], ["LIMIT", 1]]
+  Rendering comparisons/show.html.erb within layouts/application
+  [1m[36mComparison Load (1.0ms)[0m  [1m[34mSELECT  "comparisons".* FROM "comparisons" ORDER BY "comparisons"."id" ASC LIMIT $1[0m  [["LIMIT", 9]]
+  Rendered comparisons/show.html.erb within layouts/application (3.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (35.4ms)
+Completed 200 OK in 415ms (Views: 367.1ms | ActiveRecord: 11.1ms)
+
+

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Comparisons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Textfile</th>
+      <th>Csvfile</th>
+      <th>Downloadurl</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comparisons.each do |comparison| %>
+      <tr>
+        <td><%= comparison.company %></td>
+        <td><%= comparison.textFile %></td>
+        <td><%= comparison.csvFile %></td>
+        <td><%= comparison.downloadUrl %></td>
+        <td><%= link_to 'Show', comparison %></td>
+        <td><%= link_to 'Edit', edit_comparison_path(comparison) %></td>
+        <td><%= link_to 'Destroy', comparison, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comparison', new_comparison_path %>

@@ -1,0 +1,45 @@
+ <h2>Suppression Control Dialog</h2>
+
+  
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">CSV Suppression Dialog</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-xs-8">
+                      <div class="well">
+                          <%= render 'form', comparison: @comparison %>
+
+<%= link_to 'Back', comparisons_path %> 
+                      </div>
+                  </div>
+                  <div class="col-xs-12">
+                      <p class="lead">Fill in form for <span class="text-success">New CSV files</span></p>
+                      <ul class="list-unstyled" style="line-height: 2">
+                          <li><span class="fa fa-check text-success"></span> See last dowloads here</li>
+                          <li><span class="fa fa-check text-success"></span> Large file may take minutes</li>
+                          <li><span class="fa fa-check text-success"></span> log in system</li>
+                          <li><span class="fa fa-check text-success"></span> CSV file creation</li>
+                          <li><span class="fa fa-check text-success"></span> stored files<small>(limited)</small></li>
+                          
+                      </ul>
+                      <div class="col-xs-12">
+                      <p class="lead">These were <span class="text-success">Your last four Supressions</span></p>
+                      
+                      <% @comparisons.last(4).each do | d | %>
+
+  <p>Download -> <%= link_to d.company, d.downloadUrl  %> </p>
+
+  
+<% end %>
+
+
+                      <p>THIS IS A BETA subject to more enhancements</a></p>
+                  </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
