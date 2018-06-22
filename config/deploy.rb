@@ -18,9 +18,9 @@ set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
 
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
+set :puma_bind,       "unix:///home/deploy/csvsail/current/shared/tmp/sockets/puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "/home/deploy/csvsail/tmp/pids/puma.pid"
+set :puma_pid,        "/home/deploy/csvsail/shared/tmp/pids/puma.pid"
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
