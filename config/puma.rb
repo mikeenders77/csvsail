@@ -56,6 +56,8 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 plugin :tmp_restart
 
 # Change to match your CPU core count
+daemonize true
+
 workers 2
 
 # Min and Max threads per worker

@@ -38,9 +38,9 @@ task deploy: :environment do
     invoke :'deploy:cleanup'
 
     on :launch do
-      invoke :'systemctl:restart', 'csvsail-puma'
-      invoke :'systemctl:restart', 'csvsail-bg-worker'
-      invoke :'whenever:update'
+      invoke :'systemctl:restart', 'deploy-puma'
+      #invoke :'systemctl:restart', 'deploy-bg-worker'
+      #invoke :'whenever:update'
     end
   end
 end
