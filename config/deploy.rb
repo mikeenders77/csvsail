@@ -40,7 +40,7 @@ task deploy: :environment do
 
     on :launch do
       invoke :'systemctl:restart', 'deploy-puma'
-      invoke :'puma:phased_restart'
+      #invoke :'puma:phased_restart'
       #invoke :'systemctl:restart', 'deploy-bg-worker'
       #invoke :'whenever:update'
     end

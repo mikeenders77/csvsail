@@ -76,7 +76,7 @@ group :development do
 
   gem 'mina', require: false
   gem 'mina-puma', require: false, github: 'untitledkingdom/mina-puma'
-  gem 'mina-systemd', require: false
+  #gem 'mina-systemd', require: false
 
 end
 
