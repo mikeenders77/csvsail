@@ -13,7 +13,8 @@ set :rails_env, 'production'
 set :user, 'deploy'
 set :application_name, 'csvsail'
 set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
-set :shared_dirs, fetch(:shared_dirs, []).push('tmp/pids', 'tmp/sockets')
+set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
+set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/puma.rb')
 #set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/puma.rb', 'config/secrets.yml')
 
 task :environment do
@@ -39,6 +40,7 @@ task deploy: :environment do
 
     on :launch do
       invoke :'systemctl:restart', 'deploy-puma'
+      invoke :'puma:phased_restart'
       #invoke :'systemctl:restart', 'deploy-bg-worker'
       #invoke :'whenever:update'
     end
