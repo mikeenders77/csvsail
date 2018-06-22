@@ -12,7 +12,7 @@ set :branch, 'master'
 set :rails_env, 'production'
 set :user, 'deploy'
 set :application_name, 'csvsail'
-
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
 set :shared_dirs, fetch(:shared_dirs, []).push('tmp/pids', 'tmp/sockets')
 set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/puma.rb', 'config/secrets.yml')
 
@@ -21,10 +21,10 @@ task :environment do
 end
 
 task setup: :environment do
-  command %[mkdir -p "#{fetch(:deploy_to)}/config"]
-  command %[chmod g+rx,u+rwx "#{fetch(:deploy_to)}/config"]
+  command %[mkdir -p "#{fetch(:shared_path)}/config"]
+  command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/config"]
 
-  comment %{Be sure to add 'database.yml', 'secrets.yml' and 'puma.rb' in '#{fetch(:deploy_to)}/config/' directory}
+  comment %{Be sure to add 'database.yml', 'secrets.yml' and 'puma.rb' in '#{fetch(:shared_path)}/config/' directory}
 end
 
 desc "Deploys the current version to the server."
