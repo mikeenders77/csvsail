@@ -1,48 +1,61 @@
-require 'mina/bundler'
-require 'mina/rails'
-require 'mina/git'
-require 'mina/rbenv'
-require 'mina/whenever'
-require 'mina/systemd'
+# config valid for current version and patch releases of Capistrano
+lock "~> 3.11.0"
 
-set :domain, 'rightitjobs.com'
-set :deploy_to, '/home/deploy/csvsail'
-set :repository, 'git@github.com:mikeenders77/csvsail.git'
-set :branch, 'master'
-set :rails_env, 'production'
+set :application, "csvsail"
+set :repo_url, "git@github.com:mikeenders77/csvsail.git"
+
 set :user, 'deploy'
-set :application_name, 'csvsail'
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
-set :shared_dirs, fetch(:shared_dirs, []).push('log', 'tmp/pids', 'tmp/sockets', 'public/uploads')
-set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'config/puma.rb')
-#set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/puma.rb', 'config/secrets.yml')
+set :deploy_to, '/home/deploy/csvsail'
+set :puma_threads,    [2, 8]
+#append :linked_files, "config/database.yml", "config/secrets.yml"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-task :environment do
-  invoke :'rbenv:load'
-end
 
-task setup: :environment do
-  command %[mkdir -p "#{fetch(:shared_path)}/config"]
-  command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/config"]
+set :pty,             true
+set :use_sudo,        false
+set :stage,           :production
+set :deploy_via,      :remote_cache
 
-  comment %{Be sure to add 'database.yml', 'secrets.yml' and 'puma.rb' in '#{fetch(:shared_path)}/config/' directory}
-end
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log,  "#{release_path}/log/puma.access.log"
+set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
+set :puma_preload_app, true
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true  # Change to true if using ActiveRecord
+# Default deploy_to directory is /var/www/my_app_name
+# set :deploy_to, "/var/www/my_app_name"
 
-desc "Deploys the current version to the server."
-task deploy: :environment do
-  deploy do
-    invoke :'git:clone'
-    invoke :'deploy:link_shared_paths'
-    invoke :'bundle:install'
-    invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
-    invoke :'deploy:cleanup'
 
-    on :launch do
-      invoke :'systemctl:restart', 'deploy-puma'
-      #invoke :'puma:phased_restart'
-      #invoke :'systemctl:restart', 'deploy-bg-worker'
-      #invoke :'whenever:update'
-    end
-  end
-end
+
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
+
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+# append :linked_files, "config/database.yml"
+
+# Default value for linked_dirs is []
+# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for local_user is ENV['USER']
+# set :local_user, -> { `git config user.name`.chomp }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+# Uncomment the following to require manually verifying the host key before first deploy.
+# set :ssh_options, verify_host_key: :secure

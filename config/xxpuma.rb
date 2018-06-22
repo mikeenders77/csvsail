@@ -56,6 +56,8 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 plugin :tmp_restart
 
 # Change to match your CPU core count
+daemonize true
+
 workers 2
 
 # Min and Max threads per worker
@@ -69,7 +71,7 @@ rails_env = ENV['RAILS_ENV'] || "production"
 environment rails_env
 
 # Set up socket location
-bind "unix://#{shared_dir}/sockets/puma.sock"
+bind "unix://#{shared_dir}/tmp/sockets/puma.sock"
 
 # Logging
 stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
