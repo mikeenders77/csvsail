@@ -87,5 +87,5 @@ test:
 production:
   <<: *default
   database: csvsail
-  username: postgres
+  username: deploy
   password: <%= ENV['Jewbean76B'] %>

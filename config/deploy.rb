@@ -14,7 +14,7 @@ set :user, 'deploy'
 set :application_name, 'csvsail'
 set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
 set :shared_dirs, fetch(:shared_dirs, []).push('tmp/pids', 'tmp/sockets')
-set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/puma.rb', 'config/secrets.yml')
+#set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/puma.rb', 'config/secrets.yml')
 
 task :environment do
   invoke :'rbenv:load'
