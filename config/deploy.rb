@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.5.0"
+lock "~> 3.7.0"
 
 set :application, "csvsail"
 set :repo_url, "git@github.com:mikeenders77/csvsail.git"
