@@ -340,7 +340,7 @@ DEPENDENCIES
   awesome_print
   bullet
   byebug
-  capistrano (~> 3.10)
+  capistrano (~> 3.5)
   capistrano-bundler
   capistrano-rails (~> 1.4)
   capistrano-rbenv (~> 2.1)
