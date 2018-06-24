@@ -8,10 +8,9 @@ Rails.application.routes.draw do
   get '/public/download/:id' , to: 'comparison#download'
   root 'comparisons#new'
   get 'pages/about', as: :about
-
   get '/learn' , to: 'pages#learn'
   #get '/home' to: 'pages#home'
-
+  #get '/home' to: 'pages#home'
   
 
 end
