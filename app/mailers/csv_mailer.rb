@@ -5,7 +5,7 @@ class CsvMailer < ApplicationMailer
       @path = "public/download/#{@attach}"
       #name = @attach
       attachments[@attach] = File.read(@path)
-      mail(to: anthonycmark@gmail.com , subject: 'Your CSV is ready again')
+      mail(to: @user.email , subject: 'Your CSV is ready again')
       
       
     end

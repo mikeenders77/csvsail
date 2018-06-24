@@ -69,7 +69,7 @@ rails_env = ENV['RAILS_ENV'] || "production"
 environment rails_env
 
 # Set up socket location
-bind "unix://#{shared_dir}/tmp/sockets/puma.sock?umask=0664"
+bind "unix:///tmp/csvsail.sock?umask=0664"
 
 # Logging
 stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
